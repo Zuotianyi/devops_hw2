@@ -6,6 +6,8 @@ Chipset: Intel(R) Core(TM) i9-9900K CPU (x86_64)
 Ubuntu OS Details: Ubuntu 22.04.2 LTS (Jammy), 64-bit x86
 ### Software Used
 Docker: 5:24.0.4-jammy
+Jenkins: LTS-2.426.1
+Ansible: 2.16.0
 
 ## Journal
 Sometimes terminating resources incorrectly would cause dying old resources to conflict with the new ones leading to the situation that running the same command twice the first time it succeeds and the second time it fails. 
