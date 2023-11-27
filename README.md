@@ -1,12 +1,12 @@
 # devops_hw2
 ## Tooling
 ### Host Operating System Details
-Operating System: Ubuntu 22.04.2 LTS
-Chipset: Intel(R) Core(TM) i9-9900K CPU (x86_64)
+Operating System: Ubuntu 22.04.2 LTS\
+Chipset: Intel(R) Core(TM) i9-9900K CPU (x86_64)\
 Ubuntu OS Details: Ubuntu 22.04.2 LTS (Jammy), 64-bit x86
 ### Software Used
-Docker: 5:24.0.4-jammy
-Jenkins: LTS-2.426.1
+Docker: 5:24.0.4-jammy\
+Jenkins: LTS-2.426.1\
 Ansible: 2.16.0
 
 ## Journal
