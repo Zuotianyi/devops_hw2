@@ -6,7 +6,9 @@ Enter devops_hw2 folder and run the following command
 ```
 chmod +x devops_hw2.sh && ./devops_hw2.sh
 ```
-<img width="569" alt="Screenshot 2023-11-26 at 10 16 59 PM" src="https://github.com/Zuotianyi/devops_hw2/assets/55261595/5d1128fb-9988-475d-a3aa-8d25b6eb2b73">
+<img width="1440" alt="Screenshot 2023-11-26 at 10 45 59 PM" src="https://github.com/Zuotianyi/devops_hw2/assets/55261595/7057848c-553e-4e3e-84fb-85a652c5b5dc">
+<img width="1440" alt="Screenshot 2023-11-26 at 10 46 13 PM" src="https://github.com/Zuotianyi/devops_hw2/assets/55261595/f443d40a-4b0a-442d-999d-ef0a74a789e8">
+<img width="1440" alt="Screenshot 2023-11-26 at 11 21 02 PM" src="https://github.com/Zuotianyi/devops_hw2/assets/55261595/262ef122-e643-4830-8865-79b7e0c81a72">
 
 
 ### Method 2 w/o Automation
