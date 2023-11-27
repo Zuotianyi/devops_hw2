@@ -13,7 +13,7 @@ chmod +x devops_hw2.sh && ./devops_hw2.sh
 
 
 ### Method 2 w/o Automation
-**Alternatively**, run the commands in **devops_hw2.sh** line by line in case there're errors with Jenkins authorization.
+**Alternatively**, run the commands in **devops_hw2.sh** line by line in case there're issues with Jenkins and file authorization(mostly could be fixed by chmod command and restart docker).
 #### Step 1
 After running docker-compose, docker containers as below should be ready. There will be two servers running, one for Jenkins and one for web. They will share one key file as defined in **docker-compose.yaml -> volume**.\
 Terminal logs:
