@@ -1,0 +1,25 @@
+- name: Deploy and Run Petclinic App
+  hosts: webserver
+  gather_facts: false
+  tasks:
+    - name: Download jar file
+      command: "curl http://172.22.0.2:8080//job/PetClinicBuild/3/artifact/target/spring-petclinic-3.2.0-SNAPSHOT.jar -o /root/spring-petclinic-3.2.0-SNAPSHOT.jar"
+    
+    - name: Set permission on webserver_service.sh
+      command: chmod +x /root/webserver_deploy/webserver_service.sh
+
+    - name: Start PetClinic Application
+      command: "/root/webserver_deploy/webserver_service.sh"
+      async: 0
+      poll: 0
+
+    - name: Wait for PetClinic Application to Start
+      wait_for:
+        host: localhost
+        port: 8085
+        timeout: 300
+      ignore_errors: yes
+
+    - name: Print Access URL
+      debug:
+        msg: "PetClinic is up, access at http://localhost:8085"

@@ -1,0 +1,30 @@
+jenkins:
+tool:
+  git:
+    installations:
+    - home: "git"
+      name: "Default"
+  jdk:
+    installations:
+    - home: "/usr/lib/jvm/java-17-openjdk-amd64/"
+      name: "J17"
+  maven:
+    installations:
+    - name: "M3"
+      properties:
+      - installSource:
+          installers:
+          - maven:
+              id: "3.9.3"
+
+security:
+  # Run builds as user that executed the job
+  queueItemAuthenticator:
+    authenticators:
+    - global:
+        strategy: triggeringUsersAuthorizationStrategy
+
+unclassified:
+  # Set default URL
+  location:
+    url: http://jenkins:8080/

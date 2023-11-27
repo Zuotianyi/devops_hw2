@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<flow-definition plugin="workflow-job@2.40">
+    <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@2.85">
+        <script>
+            <![CDATA[
+                pipeline {
+                    agent any
+
+                    tools {
+                        maven "M3"
+                    }
+
+                    stages {
+                        stage('Checkout') {
+                            steps {
+                                git branch: 'main', url: 'https://github.com/spring-projects/spring-petclinic.git'
+                            }
+                        }
+                        stage('Build') {
+                            steps {
+                                sh './mvnw -Dmaven.test.failure.ignore=true clean package'
+                            }
+                            post {
+                                success {
+                                    junit '**/target/surefire-reports/TEST-*.xml'
+                                    archiveArtifacts 'target/*.jar'
+                                }
+                            }
+                        }
+                        stage('Deploy') {
+                            steps {
+                                script {
+                                    sh "ansible-playbook -i /root/ansible_config/inventory.yaml /root/webserver_deploy/webserver_deploy.yaml"
+                                }
+                            }
+                        }
+                    }
+                }
+            ]]>
+        </script>
+        <sandbox>true</sandbox>
+    </definition>
+</flow-definition>

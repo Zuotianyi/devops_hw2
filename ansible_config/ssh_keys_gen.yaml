@@ -1,0 +1,46 @@
+- name: Generate SSH Keys
+  hosts: localhost
+  gather_facts: false
+  vars:
+    ssh_dir: /root/.ssh
+    shared_keys_dir: /root/ansible_config/shared_ssh_keys
+    key_file: "{{ ssh_dir }}/id_rsa"
+  tasks:
+    - name: Generate SSH key pair
+      command: ssh-keygen -t rsa -b 2048 -f "{{ key_file }}" -N ""
+      args:
+        creates: "{{ key_file }}"
+
+    - name: Configure SSH settings
+      blockinfile:
+        path: "{{ ssh_dir }}/config"
+        create: yes
+        block: |
+          Host *
+            StrictHostKeyChecking no
+            UserKnownHostsFile=/dev/null
+        marker: "# {mark} ANSIBLE MANAGED BLOCK"
+      notify: Set permissions for SSH config
+
+    - name: Get the hostname
+      shell: hostname
+      register: hostname_result
+      changed_when: false
+
+    - name: Copy SSH keys to shared directory
+      ansible.builtin.copy:
+        src: "{{ item }}"
+        dest: "{{ shared_keys_dir }}/{{ hostname_result.stdout }}{{ item | regex_replace('.*/','_') }}"
+        mode: "{{ '0600' if item.endswith('.pub') else '0644' }}"
+      with_items:
+        - "{{ key_file }}"
+        - "{{ key_file }}.pub"
+      delegate_to: localhost
+
+  handlers:
+    - name: Set permissions for SSH config
+      file:
+        path: "{{ ssh_dir }}/config"
+        owner: root
+        group: root
+        mode: '0600'

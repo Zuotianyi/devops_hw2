@@ -1,0 +1,39 @@
+---
+- name: Build and Deploy PetClinic
+  hosts: localhost
+  gather_facts: false
+  vars:
+    JENKINS_URL: "http://172.22.0.2:8080"
+    JENKINS_USERNAME: "admin"
+    JENKINS_PASSWORD: "password"
+    JOB_NAME: "PetClinicBuild"
+
+  tasks: 
+    - name: Trigger Jenkins job
+      uri:
+        url: "{{ JENKINS_URL }}/job/{{ JOB_NAME }}/build"
+        method: POST
+        user: "{{ JENKINS_USERNAME }}"
+        password: "{{ JENKINS_PASSWORD }}"
+        status_code: 201
+      register: trigger_result
+      until: trigger_result.status == 201
+      retries: 10
+      delay: 10
+      ignore_errors: yes
+
+    - name: Wait for build to complete, please standby...
+      uri:
+        url: "{{ JENKINS_URL }}/job/{{ JOB_NAME }}/lastBuild/api/json"
+        user: "{{ JENKINS_USERNAME }}"
+        password: "{{ JENKINS_PASSWORD }}"
+        return_content: yes
+      register: build_status_result
+      retries: 60
+      delay: 10
+      until: build_status_result.json.result | default('') == "SUCCESS"
+      ignore_errors: yes
+
+    - name: Print Access URL
+      debug:
+        msg: "PetClinic is up, access at http://localhost:8085"

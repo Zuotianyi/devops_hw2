@@ -1,0 +1,28 @@
+---
+- name: Deploy Jenkins
+  hosts: localhost
+  vars:
+    JENKINS_URL: "http://172.22.0.2:8080"
+    JENKINS_USERNAME: "admin"
+    JENKINS_PASSWORD: "password"
+    JOB_FILE: "/var/jenkins_home/jenkins_config/app_job.xml"
+    JOB_NAME: "PetClinicBuild"
+
+  tasks:
+    - name: Read content of app_job.xml
+      slurp:
+        path: "{{ JOB_FILE }}"
+      register: job_config_content
+
+    - name: Create Jenkins Job
+      jenkins_job:
+        url: "{{ JENKINS_URL }}"
+        user: "{{ JENKINS_USERNAME }}"
+        password: "{{ JENKINS_PASSWORD }}"
+        name: "{{ JOB_NAME }}"
+        config: "{{ job_config_content['content'] | b64decode }}"
+      register: result
+
+    - name: Check Jenkins Job Creation Status
+      debug:
+        var: result

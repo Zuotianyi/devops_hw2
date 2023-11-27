@@ -1,0 +1,48 @@
+version: '3.3'
+
+services:
+  # Jenkins Service (Server 1)
+  jenkins:
+    build:
+      context: .
+      dockerfile: jenkins_config/Dockerfile
+    hostname: jenkins
+    container_name: jenkins
+    networks:
+      - devnet
+    ports:
+      - '8080:8080'
+      - '50000:50000'
+    volumes:
+      - ./jenkins_config/casc.yaml:/var/jenkins_home/casc.yaml
+      - ./jenkins_config/plugins.txt:/usr/share/jenkins/ref/plugins.txt
+      - ./ansible_config:/root/ansible_config
+      - ./jenkins_config:/var/jenkins_home/jenkins_config
+      - ./webserver_deploy:/root/webserver_deploy
+      - shared_ssh_keys:/root/ansible_config/shared_ssh_keys
+    environment:
+      - JAVA_OPTS=-Djenkins.install.runSetupWizard=false -Dhudson.security.csrf.GlobalCrumbIssuerConfiguration.DISABLE_CSRF_PROTECTION=true
+      - CASC_JENKINS_CONFIG=/var/jenkins_home/casc.yaml
+
+  # Production Web Server (Server 2)
+  webserver:
+    build:
+      context: .
+      dockerfile: webserver_config/Dockerfile
+    hostname: webserver
+    container_name: webserver
+    volumes:
+      - ./webserver_deploy:/root/webserver_deploy
+      - ./ansible_config:/root/ansible_config
+      - shared_ssh_keys:/root/ansible_config/shared_ssh_keys
+    networks:
+      - devnet
+    ports:
+      - '8085:8085'
+
+networks:
+  devnet:
+    driver: bridge
+
+volumes:
+  shared_ssh_keys:
