@@ -4,8 +4,10 @@
 ### Method 1 w/ Automation
 Enter devops_hw2 folder and run the following command
 ```
-sudo ./devops_hw2.sh
+chmod +x devops_hw2.sh && ./devops_hw2.sh
 ```
+<img width="569" alt="Screenshot 2023-11-26 at 10 16 59 PM" src="https://github.com/Zuotianyi/devops_hw2/assets/55261595/5d1128fb-9988-475d-a3aa-8d25b6eb2b73">
+
 
 ### Method 2 w/o Automation
 **Alternatively**, run the commands in **devops_hw2.sh** line by line in case there're errors with Jenkins authorization.
