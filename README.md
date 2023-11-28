@@ -10,7 +10,7 @@ Jenkins: LTS-2.426.1\
 Ansible: 2.16.0
 
 ## Journal
-Sometimes terminating resources incorrectly would cause dying old resources to conflict with the new ones leading to the situation that running the same command twice the first time it succeeds and the second time it fails. To solve the problem, I automate not only the creation but also the destruction of containers, networks, images, and vollumes in the shell script.
+Sometimes terminating resources incorrectly would cause dying old resources to conflict with the new ones leading to the situation that running the same command twice the first time it succeeds and the second time it fails. To solve the problem, I automate not only the creation but also the destruction of containers, networks, images, and volumes in the shell script.
 ## Step by Step Instructions
 ### Method 1 w/ Automation
 Enter devops_hw2 folder and run the following command which would fully automate the entire process.
