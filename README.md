@@ -17,11 +17,8 @@ Enter devops_hw2 folder and run the following command which would fully automate
 ```
 chmod +x devops_hw2.sh && ./devops_hw2.sh
 ```
-<img width="1440" alt="Screenshot 2023-11-26 at 10 45 59 PM" src="https://github.com/Zuotianyi/devops_hw2/assets/55261595/7057848c-553e-4e3e-84fb-85a652c5b5dc">
-<img width="1440" alt="Screenshot 2023-11-26 at 10 46 13 PM" src="https://github.com/Zuotianyi/devops_hw2/assets/55261595/f443d40a-4b0a-442d-999d-ef0a74a789e8">
-<img width="1440" alt="Screenshot 2023-11-26 at 11 21 02 PM" src="https://github.com/Zuotianyi/devops_hw2/assets/55261595/262ef122-e643-4830-8865-79b7e0c81a72">
-<img width="1436" alt="app_deploy_terminal_logs" src="https://github.com/Zuotianyi/devops_hw2/assets/55261595/c741a61c-efc4-4267-8707-d6bfade873f8">
-<img width="1440" alt="Screenshot 2023-11-28 at 3 56 15 PM" src="https://github.com/Zuotianyi/devops_hw2/assets/55261595/3589af6b-fa55-43d4-9aef-9213f1caa298">
+![automate](https://github.com/Zuotianyi/devops_hw2/assets/55261595/9e66ddd4-4fd0-4ca3-aaaa-d034c3880e5c)
+
 
 
 ### Method 2 w/o Automation
